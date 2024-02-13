@@ -1,5 +1,7 @@
 package database;
 
+import lombok.Getter;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -7,12 +9,13 @@ import java.sql.SQLException;
 public class DatabaseConnection {
     private static DatabaseConnection instance;
 
+    @Getter
     private Connection connection;
     private final String url = "jdbc:mysql://localhost:3306/Galaxy";
     private final String username = "root";
     private final String password = "Solni6ko";
 
-    private DatabaseConnection() {
+    public DatabaseConnection() {
         try {
             connection = DriverManager.getConnection(url, username, password);
         } catch (SQLException e) {
@@ -25,10 +28,6 @@ public class DatabaseConnection {
             instance = new DatabaseConnection();
         }
         return instance;
-    }
-
-    public Connection getConnection() {
-        return connection;
     }
 
     public void closeConnection() {

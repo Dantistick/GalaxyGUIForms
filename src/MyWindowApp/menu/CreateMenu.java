@@ -5,13 +5,9 @@ import MyWindowApp.forms.addForm;
 import javax.swing.*;
 import java.awt.*;
 
-public class Menu extends JFrame{
-    Menu(){
-        super("BD Galaxy");
-        setLayout(new BorderLayout());
-
-        JMenuBar jMenuBar = new JMenuBar();
-        setJMenuBar(jMenuBar);
+public class CreateMenu extends JFrame{
+    public static JMenuBar createMenu(JMenuBar jMenuBar){
+        jMenuBar = new JMenuBar();
 
         JMenu tables = new JMenu("Tables");
         JMenu crud = new JMenu("Crud");
@@ -43,9 +39,6 @@ public class Menu extends JFrame{
         filters.add(filterByName);
         filters.add(filterByNums);
 
-        JTable tableInfo = new JTable();
-        add(new JScrollPane(tableInfo), BorderLayout.CENTER);
-
         setPreferredSizeForMenu(tables);
         setPreferredSizeForMenu(crud);
         setPreferredSizeForMenu(filters);
@@ -63,18 +56,15 @@ public class Menu extends JFrame{
 
         add.addActionListener(e -> new addForm());
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(1280, 720));
-        pack();
-        setLocationRelativeTo(null);
-        setVisible(true);
+        return jMenuBar;
     }
 
-    public void setPreferredSizeForMenuItems(JMenuItem item){
+    public static void setPreferredSizeForMenuItems(JMenuItem item){
         item.setPreferredSize(new Dimension(100,40));
     }
 
-    public void setPreferredSizeForMenu(JMenu menu){
+    public static void setPreferredSizeForMenu(JMenu menu){
         menu.setPreferredSize(new Dimension(80,30));
     }
+
 }

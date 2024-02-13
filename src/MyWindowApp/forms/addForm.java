@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class addForm extends JFrame {
 
-    addForm() {
+    public addForm() {
         super("Add Form");
 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
