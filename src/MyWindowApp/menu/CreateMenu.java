@@ -6,8 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class CreateMenu extends JFrame{
-    public static JMenuBar createMenu(JMenuBar jMenuBar){
-        jMenuBar = new JMenuBar();
+    public JMenuBar createMenu(){
+        JMenuBar jMenuBar = new JMenuBar();
 
         JMenu tables = new JMenu("Tables");
         JMenu crud = new JMenu("Crud");
@@ -17,9 +17,9 @@ public class CreateMenu extends JFrame{
         jMenuBar.add(crud);
         jMenuBar.add(filters);
 
-        JMenuItem table1 = new JMenuItem("Table1");
-        JMenuItem table2 = new JMenuItem("Table2");
-        JMenuItem table3 = new JMenuItem("Table3");
+        JMenuItem table1 = new JMenuItem("Galaxies");
+        JMenuItem table2 = new JMenuItem("Planets");
+        JMenuItem table3 = new JMenuItem("Satellites");
 
         tables.add(table1);
         tables.add(table2);
@@ -55,6 +55,11 @@ public class CreateMenu extends JFrame{
         setPreferredSizeForMenuItems(filterByNums);
 
         add.addActionListener(e -> new addForm());
+
+        TablesInfo tablesInfo = new TablesInfo();
+        table1.addActionListener(e -> tablesInfo.galaxyInfo());
+        table2.addActionListener(e -> tablesInfo.planetInfo());
+        table3.addActionListener(e -> tablesInfo.satelliteInfo());
 
         return jMenuBar;
     }
