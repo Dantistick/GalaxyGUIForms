@@ -4,7 +4,6 @@ import MyWindowApp.menu.CreateMenu;
 import hibernate.HibernateUtil;
 
 import javax.swing.*;
-import javax.swing.text.View;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;

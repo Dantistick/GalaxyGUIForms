@@ -1,12 +1,26 @@
 package MyWindowApp.menu;
 
-import MyWindowApp.forms.addForm;
+import DAO.Impl.GalaxyDAOImpl;
+import DAO.Impl.PlanetDAOImpl;
+import DAO.Impl.SatelliteDAOImpl;
+import MyWindowApp.forms.AddEdit.addEditGalaxyForm;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.SQLException;
 
-public class CreateMenu extends JFrame{
+public class CreateMenu extends JFrame {
+
+    private GalaxyDAOImpl galaxyDAO;
+    private PlanetDAOImpl planetDAO;
+    private SatelliteDAOImpl satelliteDAO;
+
     public JMenuBar createMenu(){
+
+        galaxyDAO = new GalaxyDAOImpl();
+        planetDAO = new PlanetDAOImpl();
+        satelliteDAO = new SatelliteDAOImpl();
+
         JMenuBar jMenuBar = new JMenuBar();
 
         JMenu tables = new JMenu("Tables");
@@ -54,22 +68,45 @@ public class CreateMenu extends JFrame{
         setPreferredSizeForMenuItems(filterByName);
         setPreferredSizeForMenuItems(filterByNums);
 
-        add.addActionListener(e -> new addForm());
+        add.addActionListener(e -> new addEditGalaxyForm());
 
-        TablesInfo tablesInfo = new TablesInfo();
-        table1.addActionListener(e -> tablesInfo.galaxyInfo());
-        table2.addActionListener(e -> tablesInfo.planetInfo());
-        table3.addActionListener(e -> tablesInfo.satelliteInfo());
+        table1.addActionListener(e -> getAllEntities(galaxyDAO));
+        table2.addActionListener(e -> getAllEntities(planetDAO));
+        table3.addActionListener(e -> getAllEntities(satelliteDAO));
 
         return jMenuBar;
     }
 
-    public static void setPreferredSizeForMenuItems(JMenuItem item){
+    private static void setPreferredSizeForMenuItems(JMenuItem item){
         item.setPreferredSize(new Dimension(100,40));
     }
 
-    public static void setPreferredSizeForMenu(JMenu menu){
+    private static void setPreferredSizeForMenu(JMenu menu){
         menu.setPreferredSize(new Dimension(80,30));
+    }
+
+    private void getAllEntities(GalaxyDAOImpl galaxy){
+        try {
+            galaxy.getAll();
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    private void getAllEntities(PlanetDAOImpl planet){
+        try {
+            planet.getAll();
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    private void getAllEntities(SatelliteDAOImpl satellite){
+        try {
+            satellite.getAll();
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
 }
