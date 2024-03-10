@@ -3,6 +3,8 @@ package MyWindowApp.menu;
 import DAO.Impl.GalaxyDAOImpl;
 import DAO.Impl.PlanetDAOImpl;
 import DAO.Impl.SatelliteDAOImpl;
+import MyWindowApp.forms.Tasks.Task1;
+import MyWindowApp.forms.Tasks.Tasks;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,6 +22,7 @@ public class CreateMenu extends JFrame {
     private JMenu tables;
     private JMenu crud;
     private JMenu filters;
+    private JMenu tasks;
 
     public JMenuBar createMenu(){
 
@@ -35,12 +38,16 @@ public class CreateMenu extends JFrame {
         crud = new JMenu("Crud");
         crud.setVisible(false);
 
-        filters = new JMenu("Filter");
+        filters = new JMenu("Filters");
         filters.setVisible(false);
+
+        tasks = new JMenu("Tasks");
+        tasks.setVisible(false);
 
         jMenuBar.add(tables);
         jMenuBar.add(crud);
         jMenuBar.add(filters);
+        jMenuBar.add(tasks);
 
         JMenuItem table1 = new JMenuItem("Galaxies");
         JMenuItem table2 = new JMenuItem("Planets");
@@ -64,9 +71,20 @@ public class CreateMenu extends JFrame {
         filters.add(filterByName);
         filters.add(filterByNums);
 
+        JMenuItem task1 = new JMenuItem("Task 1");
+        JMenuItem task2 = new JMenuItem("Task 2");
+        JMenuItem task3 = new JMenuItem("Task 3");
+        JMenuItem task4 = new JMenuItem("Task 4");
+
+        tasks.add(task1);
+        tasks.add(task2);
+        tasks.add(task3);
+        tasks.add(task4);
+
         setPreferredSizeForMenu(tables);
         setPreferredSizeForMenu(crud);
         setPreferredSizeForMenu(filters);
+        setPreferredSizeForMenu(tasks);
 
         setPreferredSizeForMenuItems(table1);
         setPreferredSizeForMenuItems(table2);
@@ -79,6 +97,11 @@ public class CreateMenu extends JFrame {
         setPreferredSizeForMenuItems(filterByName);
         setPreferredSizeForMenuItems(filterByNums);
 
+        setPreferredSizeForMenuItems(task1);
+        setPreferredSizeForMenuItems(task2);
+        setPreferredSizeForMenuItems(task3);
+        setPreferredSizeForMenuItems(task4);
+
         add.addActionListener(e -> actionFromButtons.setActionListenerOnAddButton());
         edit.addActionListener(e -> actionFromButtons.setActionListenerOnEditButton());
         delete.addActionListener(e -> actionFromButtons.setActionListenerOnDeleteButton());
@@ -86,6 +109,25 @@ public class CreateMenu extends JFrame {
         table1.addActionListener(e -> getAllEntities(galaxyDAO));
         table2.addActionListener(e -> getAllEntities(planetDAO));
         table3.addActionListener(e -> getAllEntities(satelliteDAO));
+
+        Tasks tasks = new Tasks();
+
+        task1.addActionListener(e -> {
+            new Task1();
+            selectVisibleAttributeFalse();
+        });
+        task2.addActionListener(e -> {
+            tasks.task2();
+            selectVisibleAttributeFalse();
+        });
+        task3.addActionListener(e -> {
+            tasks.task3();
+            selectVisibleAttributeFalse();
+        });
+        task4.addActionListener(e -> {
+            tasks.task4();
+            selectVisibleAttributeFalse();
+        });
 
         return jMenuBar;
     }
@@ -99,7 +141,7 @@ public class CreateMenu extends JFrame {
     }
 
     private void getAllEntities(GalaxyDAOImpl galaxy){
-        selectFirstTable();
+        selectVisibleAttributeTrue();
         try {
             galaxy.getAll();
             currentTable = CurrentTable.GALAXY;
@@ -109,7 +151,7 @@ public class CreateMenu extends JFrame {
     }
 
     private void getAllEntities(PlanetDAOImpl planet){
-        selectFirstTable();
+        selectVisibleAttributeTrue();
         try {
             planet.getAll();
             currentTable = CurrentTable.PLANET;
@@ -119,7 +161,7 @@ public class CreateMenu extends JFrame {
     }
 
     private void getAllEntities(SatelliteDAOImpl satellite){
-        selectFirstTable();
+        selectVisibleAttributeTrue();
         try {
             satellite.getAll();
             currentTable = CurrentTable.SATELLITE;
@@ -128,8 +170,14 @@ public class CreateMenu extends JFrame {
         }
     }
 
-    private void selectFirstTable(){
+    private void selectVisibleAttributeTrue(){
         crud.setVisible(true);
         filters.setVisible(true);
+        tasks.setVisible(true);
+    }
+
+    private void selectVisibleAttributeFalse(){
+        crud.setVisible(false);
+        filters.setVisible(false);
     }
 }

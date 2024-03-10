@@ -199,7 +199,6 @@ public class SatelliteDAOImpl implements SatelliteDAO {
             satellite.setRadius(new BigDecimal(editSatelliteForm.textFieldRadius.getText()));
             satellite.setDistanceToPlanet(new BigDecimal(editSatelliteForm.textFieldDistanceToPlanet.getText()));
 
-
             Query query = session.createQuery("SELECT idPlanet FROM Planet WHERE namePlanet = :name");
             query.setParameter("name", editSatelliteForm.comboBoxPlanets.getSelectedItem());
 
